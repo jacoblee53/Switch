@@ -1,0 +1,26 @@
+{
+  "name": "Switch",
+  "version": "1.0",
+  "description": "Chrome Extensions Switch!",
+  "permissions": ["management"],
+  "browser_action": {
+    "default_popup": "assets/popup.html",
+    "default_icon": {
+      "16": "assets/images/switch16.png",
+      "32": "assets/images/switch32.png",
+      "48": "assets/images/switch48.png",
+      "128": "assets/images/switch128.png"
+    },
+    "default_title": "Switch!"
+  },
+  "icons": {
+    "16": "assets/images/switch16.png",
+    "32": "assets/images/switch32.png",
+    "48": "assets/images/switch48.png",
+    "128": "assets/images/switch128.png"
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "manifest_version": 2
+}

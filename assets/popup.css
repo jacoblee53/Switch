@@ -1,0 +1,58 @@
+body {
+    width: 280px;
+    margin: 0;
+}
+
+.extension {
+    background: #fff;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 8px;
+    display: block;
+}
+
+
+.icons {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+#myInput {
+    vertical-align:text-top;
+    width: 100%;
+    font-size: 1.1em;
+    padding: 12px;
+    border: none;
+    border-bottom: 2px #eee solid;
+}
+
+#myInput:focus{
+    outline: none;
+}
+
+::placeholder { 
+    color: lightgray;
+    opacity: 1; 
+}
+
+:-ms-input-placeholder { 
+    color: lightgray;
+}
+
+::-ms-input-placeholder { 
+    color: lightgray;
+}
+
+.mySpan {
+    vertical-align: middle;
+}
+
+.shortName_checked {
+    color: #000;
+}
+
+.shortName_ {
+    color: rgb(198, 198, 198);
+}
