@@ -2,50 +2,74 @@ console.log('Popup.js is running!');
 
 $(function () {
 
+    /* Chrome Management */
+
     chrome.management.getAll(function (info) {
-        /* Set Search Box Placeholder */
+        // Set Search Box Placeholder 
         $('#myInput').attr('placeholder', `Search ${info.length} extensions`);
 
-        /* Operate DOM and Append Elements Dynamically */
+        // Operate DOM and Append Elements Dynamically 
         info.forEach(element => {
 
-            /* Get Each Extension's Info */
+            // Get Each Extension's Info 
             let shortName = element.shortName;
+            let id = element.id;
+            let enabled = element.enabled ? "checked" : "";
+            let description = element.description;
+            let homepageUrl = element.homepageUrl;
             let icons = "/assets/images/null.jpg";
             if (typeof (element.icons) !== "undefined") {
                 icons = element.icons[0].url;
             }
-            let enabled = element.enabled ? "checked" : "";
-            let description = element.description;
-            let homepageUrl = element.homepageUrl;
 
             $('.container')
                 .append(`<div class="extension">          
-                            <input type="checkbox" ${enabled}>
+                            <input type="checkbox" class="isEnabled" id="${id}" ${enabled}>
                             <img class="icons" id="${shortName}_icon" src=${icons}>
                             <span class="shortName_${enabled} mySpan" href="${homepageUrl}">${shortName}</span>  
                         </div>`);
         });
-        console.log(info);
+        // console.log(info);
     });
+
+
 
     /* Events */
 
-    /* Click Event */
-    $('.container').on('click', 'span', function (param) {
-        var url = $(this).attr('href');
+    // Click span Event 
+    $('.container').on('click', 'span', function () {
+        let url = $(this).attr('href');
         window.open(url);
     });
 
-    /* Keyup Event */
+    // Checkbox Change Event
+    $('.container').on('change', '.isEnabled', function () {
+        if ($(this).is(':checked')) {
+            // console.log("false->true: " + $(this).attr('id'));
+
+            $(this).next().next().removeClass('shortName_').addClass('shortName_checked');
+            chrome.management.setEnabled($(this).attr('id'), true, function () {
+                console.log('false -> true');
+            });
+        } else {
+            // console.log("true->false: " + $(this).attr('id'));
+
+            $(this).next().next().removeClass('shortName_checked').addClass('shortName_');
+            chrome.management.setEnabled($(this).attr('id'), false, function () {
+                console.log('true -> false');
+            });
+        }
+    });
+
+    // Keyup Event 
     $('#myInput').keyup(searchExtensions);
 
-    /* Search Extension  */
+    // Search Extension  
     function searchExtensions() {
-        var input = $(this).val().toUpperCase();
-        var cnt = $('.container');
-        var extensions = $('div.extension');
-        var shortName = "";
+        let input = $(this).val().toUpperCase();
+        let cnt = $('.container');
+        let extensions = $('div.extension');
+        let shortName = "";
 
         extensions.each(function (index, element) {
             shortName = $(element).find('span').html();

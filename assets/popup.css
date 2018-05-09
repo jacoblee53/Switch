@@ -1,5 +1,5 @@
 body {
-    width: 290px;
+    width: 310px;
     margin: 0;
 }
 
@@ -53,6 +53,7 @@ body {
 .mySpan:hover {
     text-decoration: underline;
     cursor: pointer;
+    color: #000;
     font-weight: bold;
     background: rgb(255, 215, 195);
 }
