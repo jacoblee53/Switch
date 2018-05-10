@@ -65,3 +65,9 @@ body {
 .shortName_ {
     color: rgb(198, 198, 198);
 }
+
+.highlight {
+    background: #FFE50D;
+    font-weight: bold;
+    font-size: 1.1em;
+}

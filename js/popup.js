@@ -27,6 +27,7 @@ $(function () {
                             <input type="checkbox" class="isEnabled" id="${id}" ${enabled}>
                             <img class="icons" id="${shortName}_icon" src=${icons}>
                             <span class="shortName_${enabled} mySpan" href="${homepageUrl}">${shortName}</span>  
+                            <button class="uninstall">btn</button>
                         </div>`);
         });
         // console.log(info);
@@ -66,16 +67,33 @@ $(function () {
 
     // Search Extension  
     function searchExtensions() {
+        let keyword = $(this).val();
         let input = $(this).val().toUpperCase();
         let cnt = $('.container');
         let extensions = $('div.extension');
         let shortName = "";
 
         extensions.each(function (index, element) {
-            shortName = $(element).find('span').html();
+            shortName = $(element).find('span.mySpan').text();
 
+            // Clear highlight span 
+            if($(element).find('.highlight').length !== 0){
+                $(element)
+                    .find('.highlight')
+                    .replaceWith($(element).find('.highlight').html());
+            }
+
+            // Highlight keyword and Change diplay
             if (shortName.toUpperCase().indexOf(input) > -1) {
                 $(element).css('display', "block");
+                
+                var regex = RegExp(`${keyword}`, "i");
+                $(element)
+                    .find('span.mySpan')
+                    .html(
+                        $(element).find('span.mySpan').html()
+                        .replace(regex, `<span class=\"highlight\">$&</span>`)
+                    );
             } else {
                 $(element).css('display', "none");
             }
