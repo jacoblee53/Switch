@@ -27,7 +27,7 @@ $(function () {
                             <input type="checkbox" class="isEnabled" id="${id}" ${enabled}>
                             <img class="icons" id="${shortName}_icon" src=${icons}>
                             <span class="shortName_${enabled} mySpan" href="${homepageUrl}">${shortName}</span>  
-                            <button class="uninstall">btn</button>
+                            <button class="uninstall" id="${id}">REMOVE</button>
                         </div>`);
         });
         // console.log(info);
@@ -36,6 +36,14 @@ $(function () {
 
 
     /* Events */
+
+    // Click uninstall btn 
+    $('.container').on('click', '.uninstall', function () {
+        var id = $(this).attr('id');
+        chrome.management.uninstall(id, {showConfirmDialog: true} , function () {
+            console.log(`Uninstall ${id}`);
+        });
+    });
 
     // Click span Event 
     $('.container').on('click', 'span', function () {
@@ -77,7 +85,7 @@ $(function () {
             shortName = $(element).find('span.mySpan').text();
 
             // Clear highlight span 
-            if($(element).find('.highlight').length !== 0){
+            if ($(element).find('.highlight').length !== 0) {
                 $(element)
                     .find('.highlight')
                     .replaceWith($(element).find('.highlight').html());
@@ -86,7 +94,8 @@ $(function () {
             // Highlight keyword and Change diplay
             if (shortName.toUpperCase().indexOf(input) > -1) {
                 $(element).css('display', "block");
-                
+
+                // Highlight
                 var regex = RegExp(`${keyword}`, "i");
                 $(element)
                     .find('span.mySpan')
