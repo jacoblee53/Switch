@@ -73,14 +73,13 @@ body {
 .uninstall {
     float: right;
     margin-right: 15px;
-    border: none;
-    background: #E57373;
-    color: #fff;
+    border: 1px #000 solid;
+    background: #fff;
+    color: #000;
+    border-radius: 2px;
     cursor: pointer;
-    border-radius: 3px;
 }
 
 .uninstall:hover {
-    border: #000 2px solid;
-    font-weight: bold;
+    background: rgb(255, 215, 195);
 }
