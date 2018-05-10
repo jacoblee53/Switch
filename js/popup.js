@@ -91,7 +91,7 @@ $(function () {
                     .replaceWith($(element).find('.highlight').html());
             }
 
-            // Highlight keyword and Change diplay
+            // Highlight keyword and Change display
             if (shortName.toUpperCase().indexOf(input) > -1) {
                 $(element).css('display', "block");
 
